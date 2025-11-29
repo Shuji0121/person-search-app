@@ -22,7 +22,7 @@ const users: User[] = [
 export async function searchUsers(query: string): Promise<User[]> {
     console.log('Searching users with query:', query)
     const results = users.filter(user => user.name.toLowerCase().startsWith(query.toLowerCase()))
-    console.log('Search results:', results)
+    console.log('Search results:', results) 
     return results
 }
 

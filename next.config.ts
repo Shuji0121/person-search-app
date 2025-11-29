@@ -3,18 +3,11 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  experimental: {
-    // Enable turbo for both dev and build
-    turbo: {
-      rules: {
-        // Include the default rules
-        // This ensures compatibility with existing webpack configurations
-        include: ['**/*'],
-      },
-      // Resolve modules using Node.js resolution
-      resolveAlias: {
-        // Add any custom aliases here if needed
-      }
+  // In Next.js 16, turbopack config moved from experimental.turbo to top-level turbopack
+  turbopack: {
+    // Resolve modules using Node.js resolution
+    resolveAlias: {
+      // Add any custom aliases here if needed
     }
   },
   webpack: (config, { isServer }) => {
@@ -32,11 +25,8 @@ const nextConfig: NextConfig = {
     // !! WARN !!
     ignoreBuildErrors: false,
   },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: false,
-  },
+  // Note: In Next.js 16, the eslint config option was removed.
+  // Linting is now done via `eslint .` command directly.
 };
 
 export default nextConfig;

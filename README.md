@@ -2,9 +2,9 @@
 
 ## Description
 
-Person Search is a Next.js application upgraded to leverage **Next.js 15.1** and **React 19**. It demonstrates advanced search functionality using Next.js Server Components and react-select's `AsyncSelect` component. Users can search for people from a pre-populated list and view detailed information about the selected person.
+Person Search is a Next.js application upgraded to leverage **Next.js 16** and **React 19.2**. It demonstrates advanced search functionality using Next.js Server Components and react-select's `AsyncSelect` component. Users can search for people from a pre-populated list and view detailed information about the selected person.
 
-The upgrade to Next.js 15.1 introduced significant breaking changes, including a shift in how `params` and `searchParams` are handled, leading to a complete redesign of the `user-search` component to fully align with Server Components.
+The upgrade to Next.js 16 builds upon the async API changes from Next.js 15, with Turbopack now enabled by default and various performance improvements. See [docs/upgrading-next-16.md](docs/upgrading-next-16.md) for detailed upgrade notes.
 
 ## Features
 
@@ -20,10 +20,10 @@ The upgrade to Next.js 15.1 introduced significant breaking changes, including a
 
 ## Technologies Used
 
-- **Next.js 15.1** - React framework for building modern web applications
-- **React 19** - Latest React version with concurrent rendering improvements
-- **TypeScript** - Strongly-typed superset of JavaScript
-- **Node.js 20.17.0** - Required for compatibility with Next.js 15.1
+- **Next.js 16** - React framework with Turbopack by default
+- **React 19.2** - Latest React version with View Transitions, useEffectEvent, and Activity
+- **TypeScript 5+** - Strongly-typed superset of JavaScript
+- **Node.js 20.9+** - Required for compatibility with Next.js 16
 - **Tailwind CSS** - Utility-first CSS framework
 - **Radix UI** - Collection of accessible, unstyled UI components
 - **React Hook Form** - Performant and flexible forms library
@@ -33,14 +33,10 @@ The upgrade to Next.js 15.1 introduced significant breaking changes, including a
 
 ### Minimum Node.js Version
 
-The application has been tested with **Node.js 20.17.0**. Features such as ECMAScript modules and async server components require Node.js 20 or newer, making this the minimum requirement.
+The application requires **Node.js 20.9.0** or newer. Node.js 18 is no longer supported in Next.js 16.
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 20.17.0 or newer
-- npm
 
 ### Installation
 
@@ -54,7 +50,7 @@ The application has been tested with **Node.js 20.17.0**. Features such as ECMAS
 2. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. Create a `.env.local` file in the root directory and add any necessary environment variables.
@@ -62,16 +58,24 @@ The application has been tested with **Node.js 20.17.0**. Features such as ECMAS
 ### Running the Development Server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
-## How It Works (Next.js 15.1 & React 19)
+### Other Commands
+
+```bash
+pnpm build    # Build for production
+pnpm start    # Start production server
+pnpm lint     # Run ESLint
+```
+
+## How It Works (Next.js 16 & React 19.2)
 
 ### Key Changes in `UserSearch` Component
 
 1. **Server Component Design**:
    - The `user-search` component is now a **Server Component**, leveraging `searchParams` and fetching user details server-side.
-   - `searchParams` are asynchronous in Next.js 15.1, so the `user-search` component resolves them before rendering.
+   - `searchParams` are asynchronous (mandatory in Next.js 16 - synchronous access has been fully removed).
 
    ```tsx
    export default async function UserSearch({ searchParams }: { searchParams: Promise<{ userId?: string }> }) {
@@ -104,7 +108,7 @@ npm run dev
    - Validations and controlled/uncontrolled input warnings have been resolved by ensuring consistent handling in forms using React Hook Form and Zod.
 
 5. **Concurrency & Hydration**:
-   - React 19's concurrent rendering and Next.js 15.1's support for server components ensure seamless server-client hydration, reducing potential mismatches.
+   - React 19.2's concurrent rendering and Next.js 16's support for server components ensure seamless server-client hydration, reducing potential mismatches.
 
 ### Known Issues
 
@@ -261,11 +265,6 @@ Contributions are welcome! Please submit a Pull Request with your changes.
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## Acknowledgments
-
-- Next.js team for the framework
-- Radix UI for accessible components
-- All contributors of the open-source libraries used in this project
 
 ## Contact
 
